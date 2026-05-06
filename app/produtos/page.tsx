@@ -1,11 +1,7 @@
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@/lib/supabase-server'
 import Link from 'next/link'
-
-const statusLabel: Record<string, string> = {
-  DISPONIVEL: 'DISPONIVEL',
-  RESERVADO: 'RESERVADO',
-  VENDIDO: 'VENDIDO',
-}
+import LogoutButton from '@/app/components/LogoutButton'
+import { redirect } from 'next/navigation'
 
 const statusStyle: Record<string, string> = {
   DISPONIVEL: 'border-zinc-400 text-zinc-400',
@@ -14,6 +10,11 @@ const statusStyle: Record<string, string> = {
 }
 
 export default async function Produtos() {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/login')
+
   const { data: produtos, error } = await supabase
     .from('produtos')
     .select('*')
@@ -35,12 +36,15 @@ export default async function Produtos() {
           <h1 className="font-mono font-bold text-xl tracking-widest uppercase">FIVEOUT</h1>
           <p className="font-mono text-xs text-zinc-500 mt-0.5">admin / produtos</p>
         </div>
-        <Link
-          href="/produtos/novo"
-          className="font-mono text-xs font-bold tracking-widest uppercase bg-white text-black px-4 py-2 hover:bg-zinc-200 transition-colors"
-        >
-          + Nova Peca
-        </Link>
+        <div className="flex items-center gap-4">
+          <LogoutButton />
+          <Link
+            href="/produtos/novo"
+            className="font-mono text-xs font-bold tracking-widest uppercase bg-white text-black px-4 py-2 hover:bg-zinc-200 transition-colors"
+          >
+            + Nova Peca
+          </Link>
+        </div>
       </div>
 
       {produtos.length === 0 ? (
@@ -72,7 +76,7 @@ export default async function Produtos() {
                     R$ {Number(produto.preco).toFixed(2).replace('.', ',')}
                   </p>
                   <span className={`font-mono text-xs border px-2 py-0.5 mt-2 inline-block uppercase tracking-wider ${statusStyle[produto.status] ?? 'border-zinc-700 text-zinc-700'}`}>
-                    {statusLabel[produto.status] ?? produto.status}
+                    {produto.status}
                   </span>
                 </div>
               </div>
