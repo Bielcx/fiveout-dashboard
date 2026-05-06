@@ -39,6 +39,12 @@ export default async function Produtos() {
         <div className="flex items-center gap-4">
           <LogoutButton />
           <Link
+            href="/dashboard"
+            className="font-mono text-xs text-zinc-500 tracking-widest uppercase hover:text-white transition-colors"
+          >
+            dashboard
+          </Link>
+          <Link
             href="/produtos/novo"
             className="font-mono text-xs font-bold tracking-widest uppercase bg-white text-black px-4 py-2 hover:bg-zinc-200 transition-colors"
           >
