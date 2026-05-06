@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✋ Fiveout Dashboard
 
-## Getting Started
+Painel de gestão da loja Fiveout — controle de estoque, catálogo público e integração com WhatsApp.
 
-First, run the development server:
+🛍️ **[Ver catálogo](https://fiveout-dashboard.vercel.app/catalogo)** · 🔐 **[Painel admin](https://fiveout-dashboard.vercel.app/login)**
+
+---
+
+## Sobre o projeto
+
+A Fiveout é uma loja de roupas novas e semi-novas vendida pelo Instagram. O problema era que o estoque ficava desatualizado — peças vendidas continuavam aparecendo online.
+
+Esse painel resolve isso: cadastre uma peça, ela aparece no catálogo público. Vendeu? Muda o status e some na hora.
+
+---
+
+## Funcionalidades
+
+**Catálogo público** (`/catalogo`)
+- Lista peças disponíveis com foto, preço e tamanho
+- Botão "Tenho interesse" abre WhatsApp com mensagem pronta
+- Mobile-first, identidade visual da marca
+
+**Painel admin** (`/produtos`)
+- Cadastro de peças com upload de foto
+- Controle de status: Disponível / Reservado / Vendido
+- Autenticação protegida — só o dono acessa
+
+---
+
+## Stack
+
+| Tecnologia | Uso |
+|---|---|
+| Next.js 15 + TypeScript | Framework fullstack |
+| Supabase | Banco PostgreSQL + Auth + Storage |
+| Tailwind CSS | Estilização |
+| Vercel | Deploy |
+
+---
+
+## Como rodar
+
+```bash
+git clone https://github.com/Bielcx/fiveout-dashboard.git
+cd fiveout-dashboard
+npm install
+```
+
+Cria um arquivo `.env.local`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=sua_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sua_chave
+```
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acessa `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Melhorias futuras
 
-## Learn More
+- [ ] Dashboard com métricas de vendas e faturamento
+- [ ] Registrar venda com nome do comprador e preço
+- [ ] Filtro por tamanho e condição no catálogo
+- [ ] Notificação no WhatsApp quando alguém demonstrar interesse
+- [ ] Domínio personalizado
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Decisões técnicas
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Supabase SSR** — autenticação via cookies para funcionar corretamente com o App Router do Next.js, sem problemas de hidratação.
 
-## Deploy on Vercel
+**Storage do Supabase** — fotos das peças armazenadas diretamente no Supabase Storage com URL pública, sem necessidade de CDN externo.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Catálogo como página pública** — separação clara entre rotas públicas (`/catalogo`) e rotas protegidas (`/produtos`, `/dashboard`), com proxy de autenticação bloqueando acesso não autorizado.
