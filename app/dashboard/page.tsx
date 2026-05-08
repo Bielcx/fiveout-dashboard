@@ -1,6 +1,8 @@
 import { supabase } from '@/lib/supabase'
 import LogoutButton from '@/app/components/LogoutButton'
 
+export const revalidate = 0
+
 function formatBRL(value: number) {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
@@ -91,7 +93,7 @@ export default async function Dashboard() {
       }}>
         <div>
           <p style={{ fontFamily: 'monospace', fontWeight: 'bold', letterSpacing: '0.3em', fontSize: '18px', color: '#fff', margin: 0 }}>
-            FIVEOUT
+            FIVEOOUT
           </p>
           <p style={{ fontFamily: 'monospace', fontSize: '10px', color: '#555', letterSpacing: '0.15em', textTransform: 'uppercase', margin: '3px 0 0' }}>
             dashboard

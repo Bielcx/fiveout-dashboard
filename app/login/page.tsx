@@ -83,7 +83,7 @@ export default function Login() {
           }}
         >
           <div className="mb-8 text-center">
-            <h1 className="font-mono font-bold tracking-[0.3em] text-xl text-white">FIVEOUT</h1>
+            <h1 className="font-mono font-bold tracking-[0.3em] text-xl text-white">FIVEOOUT</h1>
             <p className="font-mono text-[10px] text-zinc-500 mt-1.5 tracking-widest uppercase">
               painel admin
             </p>

@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Fiveout',
-  description: 'Catálogo Fiveout',
+  title: 'Fiveoout',
+  description: 'Catálogo Fiveoout',
 }
 
 export default function RootLayout({

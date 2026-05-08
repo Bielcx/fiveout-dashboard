@@ -3,6 +3,8 @@ import Link from 'next/link'
 import LogoutButton from '@/app/components/LogoutButton'
 import { redirect } from 'next/navigation'
 
+export const revalidate = 0
+
 const statusStyle: Record<string, string> = {
   DISPONIVEL: 'border-zinc-400 text-zinc-400',
   RESERVADO: 'border-zinc-600 text-zinc-600',
@@ -33,7 +35,7 @@ export default async function Produtos() {
     <main className="min-h-screen bg-black text-white p-6 max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="font-mono font-bold text-xl tracking-widest uppercase">FIVEOUT</h1>
+          <h1 className="font-mono font-bold text-xl tracking-widest uppercase">FIVEOOUT</h1>
           <p className="font-mono text-xs text-zinc-500 mt-0.5">admin / produtos</p>
         </div>
         <div className="flex items-center gap-4">

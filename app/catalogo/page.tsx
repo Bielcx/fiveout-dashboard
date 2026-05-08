@@ -1,9 +1,11 @@
 import { supabase } from '@/lib/supabase'
 
+export const revalidate = 0
+
 function whatsappLink(produto: { nome: string; tamanho: string; condicao: string; preco: number }) {
   const preco = Number(produto.preco).toFixed(2).replace('.', ',')
   const condicao = produto.condicao === 'NOVO' ? 'Novo' : 'Semi-novo'
-  const msg = `Oi! Vi no catalogo da Fiveout e tenho interesse na peca: ${produto.nome} - Tamanho ${produto.tamanho} - ${condicao} - R$ ${preco}`
+  const msg = `Oi! Vi no catalogo da Fiveoout e tenho interesse na peca: ${produto.nome} - Tamanho ${produto.tamanho} - ${condicao} - R$ ${preco}`
   return `https://wa.me/5511960137983?text=${encodeURIComponent(msg)}`
 }
 
@@ -58,7 +60,7 @@ export default async function Catalogo() {
       }}>
         <div>
           <p style={{ fontFamily: 'monospace', fontWeight: 'bold', letterSpacing: '0.3em', fontSize: '18px', color: '#fff', margin: 0 }}>
-            FIVEOUT
+            FIVEOOUT
           </p>
           <p style={{ fontFamily: 'monospace', fontSize: '10px', color: '#555', marginTop: '3px', letterSpacing: '0.15em', textTransform: 'uppercase', margin: '3px 0 0' }}>
             catalogo oficial
