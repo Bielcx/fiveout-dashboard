@@ -49,7 +49,27 @@ export default function Catalogo() {
   const selected = produtos[selectedIndex] ?? null
 
   return (
-    <div style={{ background: C.bg, minHeight: '100vh', position: 'relative', overflow: 'hidden' }}>
+    <div style={{ background: '#0a0806', minHeight: '100vh', position: 'relative' }}>
+
+      {/* Background image */}
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 0,
+        backgroundImage: 'url(/bg.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        filter: 'brightness(0.25) saturate(0.8)',
+      }} />
+
+      {/* Dark overlay */}
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 0,
+        background: 'linear-gradient(180deg, rgba(10,8,6,0.5) 0%, rgba(10,8,6,0.3) 50%, rgba(10,8,6,0.7) 100%)',
+      }} />
 
       {/* Scrollbar hide */}
       <style>{`
@@ -57,23 +77,6 @@ export default function Catalogo() {
         .thumb-row::-webkit-scrollbar { display: none; }
         .interest-btn:hover { background: rgba(196,168,130,0.08) !important; }
       `}</style>
-
-      {/* Hand logo watermark */}
-      <img
-        src="/fivhand.png"
-        aria-hidden
-        style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '70vw',
-          opacity: 0.08,
-          pointerEvents: 'none',
-          zIndex: 0,
-          filter: 'invert(1) sepia(1) saturate(0.3)',
-        }}
-      />
 
       {/* GO OUT MATE background text */}
       <div style={{
@@ -84,7 +87,7 @@ export default function Catalogo() {
         fontSize: 'clamp(40px, 8vw, 120px)',
         fontWeight: '900',
         letterSpacing: '0.3em',
-        color: 'rgba(180,140,90,0.04)',
+        color: 'rgba(180,140,90,0.06)',
         whiteSpace: 'nowrap',
         pointerEvents: 'none',
         zIndex: 0,
@@ -109,19 +112,10 @@ export default function Catalogo() {
         borderBottom: '1px solid rgba(180,140,90,0.1)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img
-            src="/fivhand.png"
-            aria-hidden
-            style={{ width: '22px', filter: 'invert(1) sepia(1) saturate(0.3)', opacity: 0.85 }}
-          />
-          <div>
-            <p style={{ fontFamily: 'monospace', fontWeight: 'bold', letterSpacing: '0.3em', fontSize: '15px', color: C.primary, margin: 0 }}>
-              FIVEOOUT
-            </p>
-            <p style={{ fontFamily: 'monospace', fontSize: '9px', color: C.accent, margin: 0, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-              GO OUT MATE
-            </p>
-          </div>
+          <img src="/fivhand.png" style={{ width: '28px', height: '28px', filter: 'invert(1) sepia(1) saturate(0.3)', opacity: 0.9 }} alt="Fiveoout" />
+          <p style={{ fontFamily: 'monospace', fontWeight: 'bold', letterSpacing: '0.3em', fontSize: '15px', color: C.primary, margin: 0 }}>
+            FIVEOOUT
+          </p>
         </div>
         <a
           href="https://instagram.com/fiveoout"
@@ -151,7 +145,7 @@ export default function Catalogo() {
             {/* Hero */}
             {selected && (
               <div style={{ marginBottom: '12px' }}>
-                <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3', overflow: 'hidden', background: C.surface }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', overflow: 'hidden', background: C.surface, borderRadius: '8px' }}>
                   {selected.foto_url ? (
                     <img
                       src={selected.foto_url}
@@ -168,21 +162,19 @@ export default function Catalogo() {
                   <div style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to top, rgba(10,8,6,0.95) 0%, transparent 50%)',
+                    background: 'linear-gradient(to top, #0a0806 30%, rgba(10,8,6,0.6) 60%, transparent 100%)',
                   }} />
 
                   {/* Product info overlaid at bottom */}
-                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '20px 20px 20px' }}>
-                    <p style={{ fontFamily: 'monospace', fontSize: '52px', fontWeight: '100', color: C.accent, margin: '0 0 2px', lineHeight: 1, opacity: 0.6 }}>
-                      {String(selectedIndex + 1).padStart(2, '0')}
-                    </p>
-                    <p style={{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: '20px', letterSpacing: '0.15em', textTransform: 'uppercase', color: C.primary, margin: '0 0 6px', lineHeight: 1.15 }}>
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '24px 20px 28px' }}>
+                    <div style={{ width: '40px', height: '1px', background: C.accent, marginBottom: '10px', opacity: 0.7 }} />
+                    <p style={{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: 'clamp(20px, 5vw, 36px)', letterSpacing: '0.08em', textTransform: 'uppercase', color: C.primary, margin: '0 0 8px', lineHeight: 1.1 }}>
                       {selected.nome}
                     </p>
-                    <p style={{ fontFamily: 'monospace', fontSize: '10px', color: C.accent, margin: '0 0 10px', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                    <p style={{ fontFamily: 'monospace', fontSize: '10px', color: C.accent, margin: '0 0 12px', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
                       {selected.tamanho} / {selected.condicao === 'NOVO' ? 'NOVO' : 'SEMI-NOVO'}
                     </p>
-                    <p style={{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: '18px', color: C.primary, margin: '0 0 14px' }}>
+                    <p style={{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: '20px', color: C.accent, margin: '0 0 16px' }}>
                       R$ {Number(selected.preco).toFixed(2).replace('.', ',')}
                     </p>
                     <a
@@ -195,7 +187,7 @@ export default function Catalogo() {
                         width: '100%',
                         padding: '13px',
                         border: `1px solid ${C.accent}`,
-                        background: 'transparent',
+                        background: 'rgba(180,140,90,0.04)',
                         color: C.accent,
                         fontFamily: 'monospace',
                         fontSize: '10px',
@@ -233,8 +225,10 @@ export default function Catalogo() {
                     border: i === selectedIndex ? `1px solid ${C.accent}` : '1px solid rgba(180,140,90,0.1)',
                     opacity: i === selectedIndex ? 1 : 0.6,
                     background: C.surface,
+                    borderRadius: '6px',
                     transition: 'border 0.2s, opacity 0.2s',
                   }}>
+
                     {produto.foto_url ? (
                       <img
                         src={produto.foto_url}
