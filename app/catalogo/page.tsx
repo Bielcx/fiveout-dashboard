@@ -162,7 +162,7 @@ export default function Catalogo() {
                   <div style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to top, #0a0806 30%, rgba(10,8,6,0.6) 60%, transparent 100%)',
+                    background: 'linear-gradient(to top, #0a0806 20%, rgba(10,8,6,0.75) 42%, rgba(10,8,6,0.1) 65%, transparent 100%)',
                   }} />
 
                   {/* Product info overlaid at bottom */}
