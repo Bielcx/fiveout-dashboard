@@ -354,9 +354,73 @@ export default function Catalogo() {
         <p style={{ fontFamily: 'monospace', fontSize: '10px', color: C.accent, letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 8px' }}>
           ENCONTRE UM SPOT
         </p>
-        <p style={{ fontFamily: 'monospace', fontSize: '11px', color: C.muted, margin: '0 0 20px', letterSpacing: '0.05em' }}>
+        <p style={{ fontFamily: 'monospace', fontSize: '11px', color: C.muted, margin: '0 0 32px', letterSpacing: '0.05em' }}>
           Spots de skate perto de você — powered by Skatehive
         </p>
+
+        {/* Skatehive intro — two columns */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+          style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', marginBottom: '32px', alignItems: 'flex-start' }}
+        >
+          {/* Left — description */}
+          <div style={{ flex: '1 1 280px' }}>
+            <p style={{ fontFamily: 'monospace', fontSize: '9px', color: C.accent, letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 12px' }}>
+              O QUE É SKATEHIVE
+            </p>
+            <p style={{ fontFamily: 'monospace', fontSize: '12px', color: C.primary, lineHeight: 1.8, margin: '0 0 0', letterSpacing: '0.02em', opacity: 0.85 }}>
+              Skatehive é uma plataforma descentralizada construída por skatistas, para skatistas. Um espaço para compartilhar tricks, descobrir spots, ganhar recompensas pelo seu conteúdo e fazer parte de uma comunidade global do skate — sem algoritmo, sem censura.
+            </p>
+            <a
+              href="https://skatehive.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                marginTop: '16px',
+                fontFamily: 'monospace',
+                fontSize: '10px',
+                color: C.accent,
+                border: `1px solid ${C.accent}`,
+                background: 'transparent',
+                padding: '10px 24px',
+                textDecoration: 'none',
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                borderRadius: '4px',
+              }}
+            >
+              Conhecer a plataforma
+            </a>
+          </div>
+
+          {/* Right — feature pills */}
+          <div style={{ flex: '1 1 220px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {[
+              { emoji: '🛹', text: 'Compartilhe suas tricks' },
+              { emoji: '📍', text: 'Descubra spots pelo mundo' },
+              { emoji: '💰', text: 'Ganhe recompensas pelo seu conteúdo' },
+            ].map(({ emoji, text }) => (
+              <div
+                key={text}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  padding: '12px 16px',
+                  background: 'rgba(255,255,255,0.03)',
+                  border: '1px solid rgba(180,140,90,0.12)',
+                  borderRadius: '8px',
+                  backdropFilter: 'blur(8px)',
+                }}
+              >
+                <span style={{ fontSize: '18px', flexShrink: 0 }}>{emoji}</span>
+                <p style={{ fontFamily: 'monospace', fontSize: '11px', color: C.primary, margin: 0, letterSpacing: '0.04em', opacity: 0.85 }}>{text}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         <iframe
           src="https://www.google.com/maps/d/u/1/embed?mid=1iiXzotKL-uJ3l7USddpTDvadGII"
           style={{ width: '100%', height: '400px', border: 'none', borderRadius: '12px', opacity: 0.9, display: 'block' }}
