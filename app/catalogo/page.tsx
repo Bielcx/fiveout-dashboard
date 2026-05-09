@@ -304,24 +304,113 @@ export default function Catalogo() {
         )}
       </div>
 
-      {/* Footer */}
-      <motion.footer
-        {...fadeUp(0.3)}
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          padding: '40px 32px 32px',
-          textAlign: 'center',
-          fontFamily: 'monospace',
-          fontSize: '11px',
-          color: C.accent,
-          letterSpacing: '0.3em',
-          borderTop: '1px solid rgba(180,140,90,0.08)',
-          marginTop: '40px',
-        }}
+      {/* SECTION 1 — MANIFESTO */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+        style={{ position: 'relative', zIndex: 1, padding: '60px 24px', textAlign: 'center' }}
       >
-        FIVEOOUT · GO OUT MATE
-      </motion.footer>
+        <p style={{ fontFamily: 'monospace', fontSize: '10px', color: C.accent, letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 24px' }}>
+          FIVEOOUT
+        </p>
+        <div style={{ width: '100%', height: '1px', background: 'rgba(180,140,90,0.2)', marginBottom: '24px' }} />
+        <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: 'clamp(18px, 3vw, 28px)', color: C.primary, maxWidth: '600px', margin: '0 auto', lineHeight: 1.8 }}>
+          A Fiveoout nasceu pra quem não fica parado. Pra quem troca o sofá pela rua, a academia pela pista, o conforto pelo movimento. As roupas são só o começo — o resto é você decidindo ir.
+        </p>
+        <div style={{ width: '100%', height: '1px', background: 'rgba(180,140,90,0.2)', marginTop: '24px' }} />
+      </motion.div>
+
+      {/* SECTION 2 — COMO FUNCIONA */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+        style={{ position: 'relative', zIndex: 1, padding: '40px 24px 60px', textAlign: 'center' }}
+      >
+        <p style={{ fontFamily: 'monospace', fontSize: '10px', color: C.accent, letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 32px' }}>
+          COMO FUNCIONA
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '32px' }}>
+          {[
+            { emoji: '👀', text: 'Achou algo que gostou' },
+            { emoji: '💬', text: 'Manda mensagem no direct' },
+            { emoji: '✋', text: 'A peça é sua' },
+          ].map(({ emoji, text }, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+              <div style={{ textAlign: 'center' }}>
+                <p style={{ fontSize: '32px', margin: '0 0 8px' }}>{emoji}</p>
+                <p style={{ fontFamily: 'monospace', fontSize: '11px', color: C.primary, margin: 0, letterSpacing: '0.05em', maxWidth: '120px' }}>{text}</p>
+              </div>
+              {i < 2 && (
+                <p style={{ fontFamily: 'monospace', fontSize: '20px', color: C.accent, margin: 0, opacity: 0.5 }}>→</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* SECTION 3 — SKATE MAP */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+        style={{ position: 'relative', zIndex: 1, padding: '0 24px 60px', maxWidth: '800px', margin: '0 auto' }}
+      >
+        <p style={{ fontFamily: 'monospace', fontSize: '10px', color: C.accent, letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 8px' }}>
+          ENCONTRE UM SPOT
+        </p>
+        <p style={{ fontFamily: 'monospace', fontSize: '11px', color: C.muted, margin: '0 0 20px', letterSpacing: '0.05em' }}>
+          Spots de skate perto de você — powered by Skatehive
+        </p>
+        <iframe
+          src="https://www.google.com/maps/d/u/1/embed?mid=1iiXzotKL-uJ3l7USddpTDvadGII"
+          style={{ width: '100%', height: '400px', border: 'none', borderRadius: '12px', opacity: 0.9, display: 'block' }}
+          title="Skate spots map"
+        />
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <a
+            href="https://skatehive.app/map"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: 'monospace',
+              fontSize: '11px',
+              color: C.accent,
+              border: `1px solid ${C.accent}`,
+              background: 'transparent',
+              padding: '10px 24px',
+              textDecoration: 'none',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              display: 'inline-block',
+              borderRadius: '4px',
+              transition: 'background 0.2s',
+            }}
+          >
+            Ver todos os spots
+          </a>
+        </div>
+      </motion.div>
+
+      {/* SECTION 4 — FOOTER */}
+      <footer style={{
+        position: 'relative',
+        zIndex: 1,
+        padding: '40px 24px',
+        textAlign: 'center',
+        borderTop: '1px solid rgba(180,140,90,0.08)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '12px',
+      }}>
+        <p style={{ fontFamily: 'monospace', fontSize: '11px', color: 'rgba(180,140,90,0.5)', letterSpacing: '0.3em', textTransform: 'uppercase', margin: 0 }}>
+          FIVEOOUT · GO OUT MATE
+        </p>
+        <a
+          href="https://instagram.com/fiveoout"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ fontFamily: 'monospace', fontSize: '11px', color: 'rgba(180,140,90,0.5)', letterSpacing: '0.15em', textDecoration: 'none' }}
+        >
+          @fiveoout
+        </a>
+      </footer>
     </div>
   )
 }
