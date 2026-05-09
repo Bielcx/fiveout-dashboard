@@ -38,7 +38,7 @@ function whatsappLink(produto: Produto) {
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5, ease: 'easeOut', delay },
+  transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] as const, delay },
 })
 
 export default function Catalogo() {
@@ -182,7 +182,7 @@ export default function Catalogo() {
                       initial={{ opacity: 0, scale: 1.02 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.98 }}
-                      transition={{ duration: 0.4, ease: 'easeInOut' }}
+                      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] as const }}
                       style={{ position: 'absolute', inset: 0 }}
                     >
                       {selected.foto_url ? (
