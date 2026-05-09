@@ -145,7 +145,7 @@ export default function Catalogo() {
             {/* Hero */}
             {selected && (
               <div style={{ marginBottom: '12px' }}>
-                <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', overflow: 'hidden', background: C.surface, borderRadius: '8px' }}>
+                <div style={{ position: 'relative', width: '100%', aspectRatio: '3/4', maxHeight: '62vh', overflow: 'hidden', background: C.surface, borderRadius: '8px' }}>
                   {selected.foto_url ? (
                     <img
                       src={selected.foto_url}
