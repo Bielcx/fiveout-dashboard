@@ -88,7 +88,7 @@ export default function Catalogo() {
         position: 'fixed',
         inset: 0,
         zIndex: 0,
-        backgroundImage: 'url(/bg.jpg)',
+        backgroundImage: 'url(/bgg.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -102,25 +102,6 @@ export default function Catalogo() {
         zIndex: 0,
         background: 'linear-gradient(180deg, rgba(10,8,6,0.5) 0%, rgba(10,8,6,0.3) 50%, rgba(10,8,6,0.7) 100%)',
       }} />
-
-      {/* GO OUT MATE background text */}
-      <div style={{
-        position: 'fixed',
-        bottom: '10%',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        fontSize: 'clamp(40px, 8vw, 120px)',
-        fontWeight: '900',
-        letterSpacing: '0.3em',
-        color: 'rgba(180,140,90,0.06)',
-        whiteSpace: 'nowrap',
-        pointerEvents: 'none',
-        zIndex: 0,
-        fontFamily: 'monospace',
-        textTransform: 'uppercase',
-      }}>
-        GO OUT MATE
-      </div>
 
       {/* Sticky header */}
       <motion.header
@@ -304,72 +285,59 @@ export default function Catalogo() {
         )}
       </div>
 
-      {/* SECTION 1 — MANIFESTO */}
+      {/* SECTION — SKATE MAP */}
       <motion.div
         initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-        style={{ position: 'relative', zIndex: 1, padding: '60px 24px', textAlign: 'center' }}
-      >
-        <p style={{ fontFamily: 'monospace', fontSize: '10px', color: C.accent, letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 24px' }}>
-          FIVEOOUT
-        </p>
-        <div style={{ width: '100%', height: '1px', background: 'rgba(180,140,90,0.2)', marginBottom: '24px' }} />
-        <p style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: 'clamp(18px, 3vw, 28px)', color: C.primary, maxWidth: '600px', margin: '0 auto', lineHeight: 1.8 }}>
-          A Fiveoout nasceu pra quem não fica parado. Pra quem troca o sofá pela rua, a academia pela pista, o conforto pelo movimento. As roupas são só o começo — o resto é você decidindo ir.
-        </p>
-        <div style={{ width: '100%', height: '1px', background: 'rgba(180,140,90,0.2)', marginTop: '24px' }} />
-      </motion.div>
-
-      {/* SECTION 2 — COMO FUNCIONA */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-        style={{ position: 'relative', zIndex: 1, padding: '40px 24px 60px', textAlign: 'center' }}
-      >
-        <p style={{ fontFamily: 'monospace', fontSize: '10px', color: C.accent, letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 32px' }}>
-          COMO FUNCIONA
-        </p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: '32px' }}>
-          {[
-            { emoji: '👀', text: 'Achou algo que gostou' },
-            { emoji: '💬', text: 'Manda mensagem no direct' },
-            { emoji: '✋', text: 'A peça é sua' },
-          ].map(({ emoji, text }, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-              <div style={{ textAlign: 'center' }}>
-                <p style={{ fontSize: '32px', margin: '0 0 8px' }}>{emoji}</p>
-                <p style={{ fontFamily: 'monospace', fontSize: '11px', color: C.primary, margin: 0, letterSpacing: '0.05em', maxWidth: '120px' }}>{text}</p>
-              </div>
-              {i < 2 && (
-                <p style={{ fontFamily: 'monospace', fontSize: '20px', color: C.accent, margin: 0, opacity: 0.5 }}>→</p>
-              )}
-            </div>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* SECTION 3 — SKATE MAP */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-        style={{ position: 'relative', zIndex: 1, padding: '0 24px 60px', maxWidth: '800px', margin: '0 auto' }}
+        style={{ position: 'relative', zIndex: 1, padding: '40px 24px 32px', maxWidth: '800px', margin: '0 auto' }}
       >
         <p style={{ fontFamily: 'monospace', fontSize: '10px', color: C.accent, letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 8px' }}>
           ENCONTRE UM SPOT
         </p>
-        <p style={{ fontFamily: 'monospace', fontSize: '11px', color: C.muted, margin: '0 0 32px', letterSpacing: '0.05em' }}>
+        <p style={{ fontFamily: 'monospace', fontSize: '11px', color: C.muted, margin: '0 0 20px', letterSpacing: '0.05em' }}>
           Spots de skate perto de você — powered by Skatehive
         </p>
+
+        <iframe
+          src="https://www.google.com/maps/d/u/1/embed?mid=1iiXzotKL-uJ3l7USddpTDvadGII"
+          style={{ width: '100%', height: '400px', border: 'none', borderRadius: '12px', opacity: 0.9, display: 'block' }}
+          title="Skate spots map"
+        />
+        <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '40px' }}>
+          <a
+            href="https://skatehive.app/map"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: 'monospace',
+              fontSize: '11px',
+              color: C.accent,
+              border: `1px solid ${C.accent}`,
+              background: 'transparent',
+              padding: '10px 24px',
+              textDecoration: 'none',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              display: 'inline-block',
+              borderRadius: '4px',
+              transition: 'background 0.2s',
+            }}
+          >
+            Ver todos os spots
+          </a>
+        </div>
 
         {/* Skatehive intro — two columns */}
         <motion.div
           initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', marginBottom: '32px', alignItems: 'flex-start' }}
+          style={{ display: 'flex', flexWrap: 'wrap', gap: '32px', alignItems: 'flex-start' }}
         >
           {/* Left — description */}
           <div style={{ flex: '1 1 280px' }}>
             <p style={{ fontFamily: 'monospace', fontSize: '9px', color: C.accent, letterSpacing: '0.3em', textTransform: 'uppercase', margin: '0 0 12px' }}>
               O QUE É SKATEHIVE
             </p>
-            <p style={{ fontFamily: 'monospace', fontSize: '12px', color: C.primary, lineHeight: 1.8, margin: '0 0 0', letterSpacing: '0.02em', opacity: 0.85 }}>
-              Skatehive é uma plataforma descentralizada construída por skatistas, para skatistas. Um espaço para compartilhar tricks, descobrir spots, ganhar recompensas pelo seu conteúdo e fazer parte de uma comunidade global do skate — sem algoritmo, sem censura.
+            <p style={{ fontFamily: 'monospace', fontSize: '12px', color: C.primary, lineHeight: 1.8, margin: 0, letterSpacing: '0.02em', opacity: 0.85 }}>
+              Skatehive é uma plataforma descentralizada construída por skatistas, para skatistas. Um espaço para compartilhar tricks, descobrir spots, ganhar recompensas pelo seu conteúdo e fazer parte de uma comunidade global do skate, sem algoritmo, sem censura.
             </p>
             <a
               href="https://skatehive.app"
@@ -420,35 +388,6 @@ export default function Catalogo() {
             ))}
           </div>
         </motion.div>
-
-        <iframe
-          src="https://www.google.com/maps/d/u/1/embed?mid=1iiXzotKL-uJ3l7USddpTDvadGII"
-          style={{ width: '100%', height: '400px', border: 'none', borderRadius: '12px', opacity: 0.9, display: 'block' }}
-          title="Skate spots map"
-        />
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          <a
-            href="https://skatehive.app/map"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              fontFamily: 'monospace',
-              fontSize: '11px',
-              color: C.accent,
-              border: `1px solid ${C.accent}`,
-              background: 'transparent',
-              padding: '10px 24px',
-              textDecoration: 'none',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              display: 'inline-block',
-              borderRadius: '4px',
-              transition: 'background 0.2s',
-            }}
-          >
-            Ver todos os spots
-          </a>
-        </div>
       </motion.div>
 
       {/* SECTION 4 — FOOTER */}
