@@ -2,7 +2,7 @@
 
 Painel de gestão da loja Fiveout — controle de estoque, catálogo público e integração com WhatsApp.
 
-🛍️ **[Ver catálogo](https://fiveout-dashboard.vercel.app/catalogo)** · 🔐 **[Painel admin](https://fiveout-dashboard.vercel.app/login)**
+🛍️ **[Ver catálogo](https://www.fiveoout.com.br)** · 🔐 **[Painel admin](https://www.fiveoout.com.br/login)**
 
 ---
 
