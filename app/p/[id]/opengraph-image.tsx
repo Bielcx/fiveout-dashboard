@@ -31,14 +31,26 @@ export default async function Image({ params }: { params: Promise<{ id: string }
   const price = `R$ ${Number(product.preco).toFixed(2).replace('.', ',')}`
   const condicao = product.condicao === 'NOVO' ? 'NOVO' : 'SEMI-NOVO'
 
+  let photoSrc: string | null = null
+  if (product.foto_url) {
+    try {
+      const imageResponse = await fetch(product.foto_url)
+      const imageBuffer = await imageResponse.arrayBuffer()
+      const base64 = Buffer.from(imageBuffer).toString('base64')
+      photoSrc = `data:image/jpeg;base64,${base64}`
+    } catch {
+      photoSrc = null
+    }
+  }
+
   return new ImageResponse(
     (
       <div style={{ width: 1200, height: 630, background: bg, display: 'flex', border: `1px solid ${accent}` }}>
 
         {/* Left — product photo */}
-        {product.foto_url ? (
+        {photoSrc ? (
           <img
-            src={product.foto_url}
+            src={photoSrc}
             alt={product.nome}
             style={{ width: 600, height: 630, objectFit: 'cover', display: 'block' }}
           />
