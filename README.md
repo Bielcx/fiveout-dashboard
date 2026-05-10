@@ -68,7 +68,7 @@ Acessa `http://localhost:3000`
 - [ ] Registrar venda com nome do comprador e preço
 - [ ] Filtro por tamanho e condição no catálogo
 - [ ] Notificação no WhatsApp quando alguém demonstrar interesse
-- [ ] Domínio personalizado
+- [x] Domínio personalizado
 
 ---
 
