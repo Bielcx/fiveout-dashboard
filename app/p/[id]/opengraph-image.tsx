@@ -17,6 +17,9 @@ export default async function Image({ params }: { params: Promise<{ id: string }
     .eq('id', id)
     .single()
 
+  console.log('[OG] product id:', id)
+  console.log('[OG] foto_url:', product?.foto_url)
+
   if (!product) {
     return new ImageResponse(
       (
@@ -31,15 +34,21 @@ export default async function Image({ params }: { params: Promise<{ id: string }
   const price = `R$ ${Number(product.preco).toFixed(2).replace('.', ',')}`
   const condicao = product.condicao === 'NOVO' ? 'NOVO' : 'SEMI-NOVO'
 
-  let photoSrc: string | null = null
+  let imgSrc = 'https://www.fiveoout.com.br/logo.png'
+
   if (product.foto_url) {
     try {
-      const imageResponse = await fetch(product.foto_url)
-      const imageBuffer = await imageResponse.arrayBuffer()
-      const base64 = Buffer.from(imageBuffer).toString('base64')
-      photoSrc = `data:image/jpeg;base64,${base64}`
-    } catch {
-      photoSrc = null
+      const res = await fetch(product.foto_url, { cache: 'no-store' })
+      console.log('[OG] fetch status:', res.status, res.ok)
+      if (res.ok) {
+        const buffer = await res.arrayBuffer()
+        const base64 = Buffer.from(buffer).toString('base64')
+        const ct = res.headers.get('content-type') || 'image/jpeg'
+        console.log('[OG] content-type:', ct, 'buffer size:', buffer.byteLength)
+        imgSrc = `data:${ct};base64,${base64}`
+      }
+    } catch (e) {
+      console.error('[OG] Failed to load product image:', e)
     }
   }
 
@@ -48,17 +57,11 @@ export default async function Image({ params }: { params: Promise<{ id: string }
       <div style={{ width: 1200, height: 630, background: bg, display: 'flex', border: `1px solid ${accent}` }}>
 
         {/* Left — product photo */}
-        {photoSrc ? (
-          <img
-            src={photoSrc}
-            alt={product.nome}
-            style={{ width: 600, height: 630, objectFit: 'cover', display: 'block' }}
-          />
-        ) : (
-          <div style={{ width: 600, height: 630, background: surface, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span style={{ color: '#6b5d4f', fontSize: 24 }}>sem foto</span>
-          </div>
-        )}
+        <img
+          src={imgSrc}
+          alt={product.nome}
+          style={{ width: 600, height: 630, objectFit: 'cover', display: 'block' }}
+        />
 
         {/* Right — dark panel */}
         <div style={{
