@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@supabase/supabase-js'
 
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
@@ -11,14 +11,19 @@ const surface = '#120f0a'
 export default async function Image({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
 
-  const { data: product } = await supabase
+  // Use vanilla supabase-js — createBrowserClient can fail in OG image context
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+
+  const { data: product, error } = await supabase
     .from('produtos')
     .select('*')
     .eq('id', id)
     .single()
 
-  console.log('[OG] product id:', id)
-  console.log('[OG] foto_url:', product?.foto_url)
+  console.log('[OG] id:', id, '| foto_url:', product?.foto_url, '| error:', error?.message)
 
   if (!product) {
     return new ImageResponse(
@@ -34,21 +39,20 @@ export default async function Image({ params }: { params: Promise<{ id: string }
   const price = `R$ ${Number(product.preco).toFixed(2).replace('.', ',')}`
   const condicao = product.condicao === 'NOVO' ? 'NOVO' : 'SEMI-NOVO'
 
-  let imgSrc = 'https://www.fiveoout.com.br/logo.png'
-
+  // Fetch product image as base64 so Satori can render it
+  let imgSrc: string | null = null
   if (product.foto_url) {
     try {
       const res = await fetch(product.foto_url, { cache: 'no-store' })
-      console.log('[OG] fetch status:', res.status, res.ok)
+      console.log('[OG] photo fetch status:', res.status)
       if (res.ok) {
         const buffer = await res.arrayBuffer()
-        const base64 = Buffer.from(buffer).toString('base64')
         const ct = res.headers.get('content-type') || 'image/jpeg'
-        console.log('[OG] content-type:', ct, 'buffer size:', buffer.byteLength)
-        imgSrc = `data:${ct};base64,${base64}`
+        imgSrc = `data:${ct};base64,${Buffer.from(buffer).toString('base64')}`
+        console.log('[OG] photo loaded, bytes:', buffer.byteLength)
       }
     } catch (e) {
-      console.error('[OG] Failed to load product image:', e)
+      console.error('[OG] photo fetch failed:', e)
     }
   }
 
@@ -56,12 +60,18 @@ export default async function Image({ params }: { params: Promise<{ id: string }
     (
       <div style={{ width: 1200, height: 630, background: bg, display: 'flex', border: `1px solid ${accent}` }}>
 
-        {/* Left — product photo */}
-        <img
-          src={imgSrc}
-          alt={product.nome}
-          style={{ width: 600, height: 630, objectFit: 'cover', display: 'block' }}
-        />
+        {/* Left — product photo or dark placeholder */}
+        {imgSrc ? (
+          <img
+            src={imgSrc}
+            alt={product.nome}
+            style={{ width: 600, height: 630, objectFit: 'cover', display: 'block' }}
+          />
+        ) : (
+          <div style={{ width: 600, height: 630, background: surface, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <span style={{ color: accent, fontSize: 18, letterSpacing: '0.2em' }}>FIVEOOUT</span>
+          </div>
+        )}
 
         {/* Right — dark panel */}
         <div style={{
@@ -78,7 +88,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
             FIVEOOUT
           </span>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ color: '#f5f0e8', fontSize: 54, fontWeight: 700, textTransform: 'uppercase', lineHeight: 1.05, marginBottom: 18 }}>
               {product.nome}
             </span>
